@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Website</title>
+    <style>
+      /* Styles for the header */
+      /* Set the background color and font color of the header */
+      header {
+        background-color: #cccaca;
+        color: #5f5f5f;
+        /* Add some padding to the header */
+        padding: 10px;
+        /* Use flexbox to center the logo, search bar, and navigation links */
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+      }
+      /* Set up the search bar */
+      .search-bar {
+        display: flex;
+        flex-grow: 1;
+        /* Make the search bar longer */
+        width: 50%;
+      }
+      /* Make the search input fill the remaining space */
+      .search-bar input[type="text"] {
+        flex-grow: 1;
+        margin-right: 10px;
+      }
+      /* Style the search button */
+      .search-bar button[type="submit"] {
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+      }
+      /* Style the navigation links */
+      nav ul {
+        list-style: none;
+        display: flex;
+      }
+      nav li {
+        margin-left: 10px;
+      }
+      nav a {
+        color: #333;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      /* Styles for the image gallery */
+      /* Add some padding to the main content area */
+      main {
+        padding: 20px;
+      }
+      /* Use flexbox to create a gallery of images */
+      .gallery {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 20px;
+      }
+      /* Add some margin to each gallery item */
+      .gallery-item {
+        margin-right: 20px;
+        margin-bottom: 20px;
+      }
+      /* Make each image in the gallery fill its container */
+      .gallery-item img {
+        width: 100%;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Create a header with a search bar and navigation links -->
+    <header>
+      <!-- Create a search bar with an input field and submit button -->
+      <form class="search-bar">
+        <input type="text" placeholder="Search...">
+        <button type="submit">Search</button>
+      </form>
+      <!-- Create navigation links to access the Upload and Account pages -->
+      <nav>
+        <ul>
+          <li><a href="{{ url_for('views.upload') }}">Upload</a></li>
+          <li><a href="{{ url_for('views.account') }}">Account</a></li>
+        </ul>
+      </nav>
+    </header>
+    <!-- Create a main content area with a gallery of images -->
+    <main>
+      <!-- Use a loop to display each image in the gallery -->
+      <div class="gallery">
+        {% for image in images %}
+        <div class="gallery-item">
+          <!-- Create a link to the full-size image -->
+          <a href="{{ url_for('image', filename=image.filename) }}">
+            <!-- Display the thumbnail of the image -->
+            <img src="{{ url_for('static', filename=image.path) }}" alt="{{ image.filename }}">
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+    </main>
+  </body>
+</html>
